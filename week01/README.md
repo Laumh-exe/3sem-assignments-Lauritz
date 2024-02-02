@@ -2,9 +2,7 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
-- which one are completed and which one are not
+- Lauritz Max Hauge
+- Week 1 assignment complete
+- did first 9 tasks, did not complete bonus task.
 
-## Friday presentation
-- add the friday presentation into the weekly folder
