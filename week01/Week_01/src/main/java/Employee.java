@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
 import java.util.Date;
 
-public class Employee {
+public class Employee implements Serializable {
     private String name;
     private LocalDate birthDate;
 
@@ -35,5 +36,13 @@ public class Employee {
 
     public Period getAgePeriod() {
         return Period.between(this.getBirthDate(), LocalDate.now());
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+            "name='" + name + '\'' +
+            ", birthDate=" + birthDate +
+            '}';
     }
 }

@@ -1,6 +1,10 @@
 import java.sql.SQLOutput;
 import java.time.*;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -31,6 +35,13 @@ public class Main {
 
         System.out.println("\nEX7 RESULTS:");
         ex7();
+
+        System.out.println("\nEX8 RESULTS:");
+        ex8();
+
+        System.out.println("\nEX9 RESULTS:");
+        ex9();
+
 
     }
 
@@ -295,7 +306,26 @@ public class Main {
     }
 
     public static void ex8() {
+        DataStorage<Employee> fileStorage = new FileStorage<>();
+        String filename = fileStorage.store(new Employee("John", LocalDate.of(2001,2,19)));
+        Employee retrievedInt = fileStorage.retrieve(filename);
+        System.out.println(retrievedInt);
+    }
 
+    public static void ex9() {
+        CompletableFuture<Void> completableFuture1 = CompletableFuture.runAsync(() -> new Task().run());
+        CompletableFuture<Void> completableFuture2 = CompletableFuture.runAsync(() -> new Task().run());
+        CompletableFuture<Void> completableFuture3 = CompletableFuture.runAsync(() -> new Task().run());
+
+        CompletableFuture<Void> all = CompletableFuture.allOf(completableFuture1,completableFuture3,completableFuture2);
+        all.thenRun(() -> System.out.println("Tasks Complete"));
+
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        executorService.submit(() -> new Task().run());
+        executorService.submit(() -> new Task().run());
+        executorService.submit(() -> new Task().run());
+        executorService.shutdown();
+        System.out.println("Tasks complete");
     }
 
 }

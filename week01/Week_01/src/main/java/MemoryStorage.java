@@ -1,11 +1,26 @@
-public class MemoryStorage<T> implements DataStorage{
-    @Override
-    public String store(Object data) {
-        return null;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class MemoryStorage<T> implements DataStorage<T>{
+    private Integer idCounter;
+    Map<String, T> memory;
+
+    public MemoryStorage() {
+        memory = new HashMap<>();
     }
 
     @Override
-    public Object retrieve(String source) {
-        return null;
+    public String store(T data) {
+        idCounter++;
+        String id = idCounter.toString();
+        memory.put(id,data);
+        return id;
+    }
+
+    @Override
+    public T retrieve(String source) {
+        return memory.get(source);
     }
 }
