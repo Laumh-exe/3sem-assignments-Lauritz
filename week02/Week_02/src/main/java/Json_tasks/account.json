@@ -1,0 +1,77 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Johnson",
+    "birthDate": "21-02-1996",
+    "address": {
+      "street": "Tornelisevej",
+      "city": "Valby",
+      "zipCode": 2500
+    },
+    "account": {
+      "id": "1",
+      "balance": "2500",
+      "isActive": false
+    }
+  },
+  {
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "birthDate": "15-07-1990",
+    "address": {
+      "street": "Elm Street",
+      "city": "Springfield",
+      "zipCode": 12345
+    },
+    "account": {
+      "id": "2",
+      "balance": "3000",
+      "isActive": true
+    }
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Jones",
+    "birthDate": "03-04-1985",
+    "address": {
+      "street": "Oak Avenue",
+      "city": "Maplewood",
+      "zipCode": 54321
+    },
+    "account": {
+      "id": "3",
+      "balance": "500",
+      "isActive": true
+    }
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Brown",
+    "birthDate": "28-12-1993",
+    "address": {
+      "street": "Pine Street",
+      "city": "Riverside",
+      "zipCode": 67890
+    },
+    "account": {
+      "id": "4",
+      "balance": "10000",
+      "isActive": false
+    }
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Davis",
+    "birthDate": "09-10-1980",
+    "address": {
+      "street": "Cedar Lane",
+      "city": "Hillside",
+      "zipCode": 13579
+    },
+    "account": {
+      "id": "5",
+      "balance": "700",
+      "isActive": true
+    }
+  }
+]
