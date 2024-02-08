@@ -1,11 +1,11 @@
 package Json_tasks;
 
+import Json_tasks.DTO.PersonAccountDTO;
+import Json_tasks.DTO.SimplifiedPersonDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -44,9 +44,14 @@ public class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         Path filePath = Path.of("src/main/java/Json_tasks/account.json");
         String jsonString = Files.readString(filePath);
-        List<Person> people = objectMapper.readValue(jsonString, new TypeReference<List<Person>>() {});
+        //Read from Array
+        List<PersonAccountDTO> people = objectMapper.readValue(jsonString, new TypeReference<List<PersonAccountDTO>>() {});
 
-        System.out.println(people.get(0).getFirstName());
+        SimplifiedPersonDTO person1 = new SimplifiedPersonDTO(people.get(0).getFirstName(),people.get(0).getLastName(),people.get(0).getAddress().getCity(),people.get(0).getAddress().getZipCode(),people.get(0).getAccount().isActive());
+
+
+        System.out.println(people.get(0));
+        System.out.println(person1);
     }
 
 }
