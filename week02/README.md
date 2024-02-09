@@ -2,9 +2,5 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
-- which one are completed and which one are not
-
-## Friday presentation
-- add the friday presentation into the weekly folder
+- Lauritz Hauge
+- all tasks are here in seperate packages, didn't finish bonus task
