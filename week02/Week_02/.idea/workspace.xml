@@ -67,7 +67,8 @@
       <workItem from="1707209046017" duration="10254000" />
       <workItem from="1707222294015" duration="8232000" />
       <workItem from="1707330476240" duration="3034000" />
-      <workItem from="1707379845469" duration="13106000" />
+      <workItem from="1707379845469" duration="13889000" />
+      <workItem from="1707482198226" duration="5509000" />
     </task>
     <task id="LOCAL-00001" summary="first two tasks">
       <created>1707335256911</created>
@@ -85,17 +86,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first two tasks" />
     <option name="LAST_COMMIT_MESSAGE" value="first two tasks" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Multithreading/Exercise_3/AddingNumbers.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
