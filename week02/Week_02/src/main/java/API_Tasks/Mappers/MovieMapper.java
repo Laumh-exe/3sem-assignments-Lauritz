@@ -38,6 +38,7 @@ public class MovieMapper implements IMediaMapper {
     public MovieDTO getByID(String id) {
         String idUrl = "https://api.themoviedb.org/3/find/{id}?external_source=imdb_id"
             .replace("{id}",id);
+
         String res = getResponseBody(idUrl);
         VisualMediaDTO visualMediaDTO = gson.fromJson(res, VisualMediaDTO.class);
         return visualMediaDTO.getMovie_results()[0];
