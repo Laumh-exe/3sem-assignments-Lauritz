@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SimplifiedPersonDTO {
 
 
-
+    private PersonAccountDTO person;
+    private AccountDetailsDTO  accoutnDetails;
     private String fullName;
     private String city;
     private int zipCode;
@@ -18,6 +19,11 @@ public class SimplifiedPersonDTO {
         this.city = city;
         this.zipCode = zipCode;
         this.isActive = isActive;
+    }
+
+    public SimplifiedPersonDTO(PersonAccountDTO person, AccountDetailsDTO accoutnDetails) {
+        this.person = person;
+        this.accoutnDetails = accoutnDetails;
     }
 
     @Override

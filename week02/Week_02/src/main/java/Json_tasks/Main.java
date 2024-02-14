@@ -51,7 +51,7 @@ public class Main {
 
 
         System.out.println(people.get(0));
-        System.out.println(person1);
+        //System.out.println(person1);
     }
 
 }
