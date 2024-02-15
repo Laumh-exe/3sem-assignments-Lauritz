@@ -1,4 +1,4 @@
-package JPA_Lifecycle_and_Annotations;
+package The_Point_exercise;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import unicorns.Unicorn;
 
 import java.util.Properties;
 
@@ -23,7 +22,7 @@ public class HibernateConfig {
 
             Properties props = new Properties();
 
-            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/students?currentSchema=public");
+            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/points?currentSchema=public");
             props.put("hibernate.connection.username", "postgres");
             props.put("hibernate.connection.password", "postgres");
             props.put("hibernate.show_sql", "true"); // show sql in console
@@ -57,7 +56,7 @@ public class HibernateConfig {
     }
 
     private static void getAnnotationConfiguration(Configuration configuration) {
-        configuration.addAnnotatedClass(Unicorn.class);
+        configuration.addAnnotatedClass(Point.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig() {
