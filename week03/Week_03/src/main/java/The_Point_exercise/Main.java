@@ -10,9 +10,9 @@ public class Main {
 
         System.out.println("Number of points: " + pointDAO.findNumberOfPoints());
 
-        //pointDAO.getAll().forEach(System.out::println);
+        pointDAO.getAll().forEach(System.out::println);
 
-        //pointDAO.close();
+        pointDAO.close();
 
     }
 

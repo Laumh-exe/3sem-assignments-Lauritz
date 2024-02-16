@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PointDAOTest {
@@ -47,15 +50,24 @@ class PointDAOTest {
     public void findAverageXValue() {
         Point point1 = new Point(10,10);
         Point point2 = new Point(20,10);
-        double avg = point1.getX()+point2.getX()/2;
+        double avg = (point1.getX()+point2.getX())/2;
         em.getTransaction().begin();
         em.persist(point1);
         em.persist(point2);
         em.getTransaction().commit();
+        assertEquals(avg, pointDAO.findAverageXValue());
     }
 
     @Test
     void getAll() {
+        int expected = 15;
+        em.getTransaction().begin();
+        for(int i = 0; i < expected; i++) {
+            Point point = new Point(i,i);
+            em.persist(point);
+        }
+        em.getTransaction().commit();
+        assertEquals(expected,pointDAO.getAll().size());
     }
 
     @AfterAll

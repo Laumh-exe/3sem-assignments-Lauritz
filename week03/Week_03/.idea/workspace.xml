@@ -83,7 +83,7 @@
       <recent name="JPA_Lifecycle_and_Annotations" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PointDAOTest.findNumberOfPoints">
+  <component name="RunManager" selected="JUnit.PointDAOTest.getAll">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="The_Point_exercise.Main" />
       <module name="Week_03" />
@@ -106,6 +106,22 @@
       <data-source id="c3a5efb2-ff3d-4c56-b0c2-d829b168f9a3" />
       <method v="2" />
     </configuration>
+    <configuration name="PointDAOTest.findAverageXValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Week_03" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="The_Point_exercise.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="The_Point_exercise" />
+      <option name="MAIN_CLASS_NAME" value="The_Point_exercise.PointDAOTest" />
+      <option name="METHOD_NAME" value="findAverageXValue" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PointDAOTest.findNumberOfPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Week_03" />
       <extension name="coverage">
@@ -117,6 +133,22 @@
       <option name="PACKAGE_NAME" value="The_Point_exercise" />
       <option name="MAIN_CLASS_NAME" value="The_Point_exercise.PointDAOTest" />
       <option name="METHOD_NAME" value="findNumberOfPoints" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PointDAOTest.getAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Week_03" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="The_Point_exercise.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="The_Point_exercise" />
+      <option name="MAIN_CLASS_NAME" value="The_Point_exercise.PointDAOTest" />
+      <option name="METHOD_NAME" value="getAll" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,6 +172,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PointDAOTest.getAll" />
+        <item itemvalue="JUnit.PointDAOTest.findAverageXValue" />
         <item itemvalue="JUnit.PointDAOTest.findNumberOfPoints" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.PointDAOTest.store1000" />
@@ -157,6 +191,7 @@
       <workItem from="1707838689187" duration="7702000" />
       <workItem from="1707910088768" duration="11789000" />
       <workItem from="1708011511525" duration="7161000" />
+      <workItem from="1708072463276" duration="1286000" />
     </task>
     <servers />
   </component>
@@ -168,8 +203,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/The_Point_exercise/PointDAOTest.java</url>
-          <line>25</line>
+          <line>28</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/The_Point_exercise/PointDAOTest.java</url>
+          <line>61</line>
+          <properties class="The_Point_exercise.PointDAOTest" method="getAll">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
