@@ -31,7 +31,6 @@ class PointDAOTest {
         em.getTransaction().commit();
     }
 
-
     @Test
     public void store1000() {
         pointDAO.store1000();
