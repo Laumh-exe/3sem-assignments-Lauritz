@@ -1,8 +1,10 @@
-package Config;
+package config;
 import exercise1.Fee;
 import exercise1.Note;
 import exercise1.Person;
 import exercise1.PersonDetail;
+import exercise2.model.Driver;
+import exercise2.model.WasteTruck;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -64,6 +66,8 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(PersonDetail.class);
         configuration.addAnnotatedClass(Fee.class);
         configuration.addAnnotatedClass(Note.class);
+        configuration.addAnnotatedClass(WasteTruck.class);
+        configuration.addAnnotatedClass(Driver.class);
     }
 
     private static EntityManagerFactory getEntityManagerFactoryConfigDefault(String name) {
