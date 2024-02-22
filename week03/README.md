@@ -2,9 +2,6 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
+- Lauritz
+- All asignments are completed. The DAO exercise is part of the student exercise
 - which one are completed and which one are not
-
-## Friday presentation
-- add the friday presentation into the weekly folder
