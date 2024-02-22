@@ -1,6 +1,6 @@
 package exercise1;
 
-import config.HibernateConfig;
+import exercise3.config.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
