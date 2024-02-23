@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18c026d5-80f5-49e5-b9b6-5012dc63eb0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/DolphinDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/Fee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/HibernateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/NotesAndNamesDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise1/PersonDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/test/java/exercise1/DolphinDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/config/HibernateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/dao/PackageDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/dao/ShipmentDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/DeliveryStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/Package.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/Shipment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/test/java/exercise4/dao/PackageDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/test/java/exercise4/dao/ShipmentDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +101,7 @@
       <recent name="JPQL_Queries" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Database Script.console.sql">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a4ed2162-7b7e-438a-b323-bd948d2572b7/console.sql" />
       <script-mode>FILE</script-mode>
@@ -216,6 +217,8 @@
       <workItem from="1708432126905" duration="2525000" />
       <workItem from="1708603667150" duration="55000" />
       <workItem from="1708603730869" duration="135000" />
+      <workItem from="1708685364895" duration="650000" />
+      <workItem from="1708687252799" duration="2018000" />
     </task>
     <servers />
   </component>
@@ -243,15 +246,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/GLS_Package_Tracking/PackageDAOTest.java</url>
-          <line>37</line>
-          <properties class="GLS_Package_Tracking.PackageDAOTest" method="savePackage">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
