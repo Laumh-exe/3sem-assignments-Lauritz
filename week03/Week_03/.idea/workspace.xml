@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18c026d5-80f5-49e5-b9b6-5012dc63eb0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/config/HibernateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/dao/PackageDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/dao/ShipmentDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/DeliveryStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/Location.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/Package.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/main/java/exercise4/model/Shipment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/test/java/exercise4/dao/PackageDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../week04/week_04/src/test/java/exercise4/dao/ShipmentDAOTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="18c026d5-80f5-49e5-b9b6-5012dc63eb0c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -219,6 +208,7 @@
       <workItem from="1708603730869" duration="135000" />
       <workItem from="1708685364895" duration="650000" />
       <workItem from="1708687252799" duration="2018000" />
+      <workItem from="1708965115982" duration="599000" />
     </task>
     <servers />
   </component>
