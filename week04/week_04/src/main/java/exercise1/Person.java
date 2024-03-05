@@ -33,11 +33,11 @@ public class Person
 
     // Relationer 1:m
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
     private Set<Fee> fees = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "createdBy", cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
     private Set<Note> notes = new HashSet<>();
 
     // Bi-directional update
