@@ -1,35 +1,37 @@
 package app.HotelExercise.DAO;
 
-public class HotelDAO extends ADAO{
+import app.HotelExercise.Config.HibernateConfig;
+import app.HotelExercise.Entities.Hotel;
+import jakarta.persistence.EntityManagerFactory;
 
-    @Override
-    public void create() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+public class HotelDAO extends ADAO<Hotel>{
+
+    private static EntityManagerFactory emf;   
+    private static HotelDAO instance;
+    private HotelDAO() {};
+    public static HotelDAO getInstance() {
+        if (instance == null) {
+            instance = new HotelDAO();
+            emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
+        }
+        return instance;
     }
 
     @Override
-    public void getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    public Hotel getByID(Hotel hotel) {
+        try(var em = emf.createEntityManager()) {
+            return em.find(Hotel.class, hotel.getId());
+        }
     }
 
     @Override
-    public void getByID() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getByID'");
+    public void update(Hotel hotel) {
+        try(var em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.merge(hotel);
+            em.getTransaction().commit();
+        }
     }
 
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-    @Override
-    public void delete() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
 
 }

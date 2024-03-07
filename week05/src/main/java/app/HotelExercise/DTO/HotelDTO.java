@@ -17,6 +17,6 @@ public class HotelDTO {
         this.id = hotel.getId().toString();
         this.name = hotel.getName();
         this.address = hotel.getAddress();
-        this.rooms = hotel.getRooms();
+        this.rooms = hotel.getRoomsAsDTO();
     }
 }

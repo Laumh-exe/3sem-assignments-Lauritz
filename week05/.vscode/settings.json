@@ -5,7 +5,10 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 5432,
+<<<<<<< Updated upstream
             "askForPassword": true,
+=======
+>>>>>>> Stashed changes
             "driver": "PostgreSQL",
             "name": "localhost",
             "database": "hoteldb",

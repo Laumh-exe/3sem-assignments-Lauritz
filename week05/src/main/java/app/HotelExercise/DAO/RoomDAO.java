@@ -1,35 +1,36 @@
 package app.HotelExercise.DAO;
 
-public class RoomDAO extends ADAO{
+import app.HotelExercise.Config.HibernateConfig;
+import app.HotelExercise.Entities.Room;
+import jakarta.persistence.EntityManagerFactory;
 
-    @Override
-    public void create() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+public class RoomDAO extends ADAO<Room> {
+
+    private static EntityManagerFactory emf;
+
+    private static RoomDAO instance;
+    private RoomDAO() {}
+    public static RoomDAO getInstance() {
+        if (instance == null) {
+            instance = new RoomDAO();
+            emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
+        }
+        return instance;
     }
 
     @Override
-    public void getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    public Room getByID(Room room) {
+        try (var em = emf.createEntityManager()) {
+            return em.find(Room.class, room.getId());
+        }
     }
 
     @Override
-    public void getByID() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getByID'");
+    public void update(Room room) {
+        try (var em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.merge(room);
+            em.getTransaction().commit();
+        }
     }
-
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-    @Override
-    public void delete() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-    
 }

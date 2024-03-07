@@ -25,7 +25,7 @@ public class Hotel {
     public Map<String , RoomDTO> getRoomsAsDTO(){
         Map<String, RoomDTO> roomsDTO = new HashMap<String, RoomDTO>();
         for (Map.Entry<String, Room> entry : rooms.entrySet()) {
-            roomsDTO.put(entry.getKey(), new RoomDTO(entry.getValue()));
+            roomsDTO.put(entry.getKey(), entry.getValue().toDTO());
         }
         return roomsDTO;
     }

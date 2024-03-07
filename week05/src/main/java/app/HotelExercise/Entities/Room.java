@@ -2,6 +2,7 @@ package app.HotelExercise.Entities;
 
 import java.util.UUID;
 
+import app.HotelExercise.DTO.RoomDTO;
 import lombok.*;
 
 @Getter
@@ -17,5 +18,9 @@ public class Room {
         this.hotelID = hotelID;
         this.number = number;
         this.price = price;
+    }
+
+    public RoomDTO toDTO() {
+        return new RoomDTO(this);
     }
 }

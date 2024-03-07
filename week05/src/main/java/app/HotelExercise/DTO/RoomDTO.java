@@ -2,6 +2,8 @@ package app.HotelExercise.DTO;
 
 import java.util.UUID;
 
+import app.HotelExercise.Entities.Room;
+
 public class RoomDTO {
     private String id;
     private String hotelID;

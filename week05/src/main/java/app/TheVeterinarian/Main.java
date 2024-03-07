@@ -2,8 +2,8 @@ package app.TheVeterinarian;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
-import app.TheVeterinarian.Handlers.AppointmentHandler;
-import app.TheVeterinarian.Handlers.PatientHandler;
+import app.TheVeterinarian.Controllers.AppointmentController;
+import app.TheVeterinarian.Controllers.PatientController;
 import io.javalin.Javalin;
 import io.javalin.apibuilder.EndpointGroup;
 
@@ -23,7 +23,7 @@ public class Main {
     }
 
     public static EndpointGroup getAppointmentResource() {
-        AppointmentHandler appointments = new AppointmentHandler();
+        AppointmentController appointments = new AppointmentController();
         return () -> {
             path("/appointments", () -> {
                 get("/", appointments.getAllAppointments());
@@ -33,7 +33,7 @@ public class Main {
     }
 
     public static EndpointGroup getPatientResource() {
-        PatientHandler patients = new PatientHandler();
+        PatientController patients = new PatientController();
         return () -> {
             path("/patients", () -> {
                 get("/", patients.getAllPatients());

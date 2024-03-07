@@ -1,4 +1,4 @@
-package app.TheVeterinarian.Handlers;
+package app.TheVeterinarian.Controllers;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -9,10 +9,10 @@ import app.TheVeterinarian.Appointment;
 import app.TheVeterinarian.Patient;
 import io.javalin.http.Handler;
 
-public class AppointmentHandler {
+public class AppointmentController {
     Map<UUID, Appointment> appointments;
-    
-    public AppointmentHandler() {
+
+    public AppointmentController() {
         appointments = new HashMap<>();
 
         //DATA
@@ -23,14 +23,14 @@ public class AppointmentHandler {
     }
 
     public Handler getAllAppointments() {
-        return ctx -> ctx.json("getAllAppointments");
+        return ctx -> ctx.json("getAllAppointments").status(200);
     }
 
     public Handler getAppointmentById() {
         return ctx -> {
             try {
                 UUID id = UUID.fromString(ctx.pathParam("id"));
-                ctx.json(appointments.get(id));
+                ctx.json(appointments.get(id)).status(200);
             } catch (IndexOutOfBoundsException e) {
                 ctx.status(404).result("Appointment not found");
             }
