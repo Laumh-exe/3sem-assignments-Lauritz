@@ -1,26 +1,47 @@
 package app.HotelExercise.Entities;
-
-import java.util.UUID;
-
 import app.HotelExercise.DTO.RoomDTO;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "room")
 public class Room {
-    private UUID id;
-    private String hotelID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotelID;
+
+    @Column(name = "number")
     private int number;
+
+    @Column(name = "price")
     private double price;
 
-    public Room(String hotelID, int number, double price) {
-        this.id = UUID.randomUUID();
-        this.hotelID = hotelID;
+    public Room(int number, double price, Hotel hotelID) {
         this.number = number;
         this.price = price;
+        this.hotelID = hotelID;
     }
 
     public RoomDTO toDTO() {
         return new RoomDTO(this);
     }
+    
+
 }

@@ -1,27 +1,29 @@
 package app.HotelExercise.DAO;
 
+import java.util.List;
+
 import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.Entities.Room;
 import jakarta.persistence.EntityManagerFactory;
 
-public class RoomDAO extends ADAO<Room> {
+public class RoomDAO extends ADAO<Room, Integer> {
 
-    private static EntityManagerFactory emf;
+    private static EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
 
     private static RoomDAO instance;
     private RoomDAO() {}
-    public static RoomDAO getInstance() {
+    public static RoomDAO getRoomDAOInstance() {
         if (instance == null) {
             instance = new RoomDAO();
-            emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
+            ADAO.emf = emf;
         }
         return instance;
     }
 
     @Override
-    public Room getByID(Room room) {
+    public Room getByID(Integer id) {
         try (var em = emf.createEntityManager()) {
-            return em.find(Room.class, room.getId());
+            return em.find(Room.class, id);
         }
     }
 
@@ -31,6 +33,14 @@ public class RoomDAO extends ADAO<Room> {
             em.getTransaction().begin();
             em.merge(room);
             em.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public List<Room> getAll() {
+        try (var em = emf.createEntityManager()) {
+            var query = em.createQuery("SELECT r FROM Room r", Room.class);
+            return query.getResultList();
         }
     }
 }

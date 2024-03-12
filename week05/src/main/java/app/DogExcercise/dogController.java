@@ -10,11 +10,9 @@ import lombok.Setter;
 
 @Setter
 public class dogController {
-    Map<Integer, DogDTO> dogs;
+    Map<Integer, DogDTO> dogs = new HashMap<>();
     
     public dogController() {
-        dogs = new HashMap();
-
         DogDTO.startIdCount();
         //DATA
         DogDTO dog1 = new DogDTO("Fido", 3, "Golden Retriever");

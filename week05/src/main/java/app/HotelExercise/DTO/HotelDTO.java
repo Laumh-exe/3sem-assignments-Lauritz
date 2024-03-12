@@ -8,13 +8,13 @@ import lombok.*;
 @Getter
 @Setter
 public class HotelDTO {
-    private String id;
+    private Integer id;
     private String name;   
     private String address;
-    private Map<String, RoomDTO> rooms;
+    private Map<Integer, RoomDTO> rooms;
 
     public HotelDTO(Hotel hotel) {
-        this.id = hotel.getId().toString();
+        this.id = hotel.getId();
         this.name = hotel.getName();
         this.address = hotel.getAddress();
         this.rooms = hotel.getRoomsAsDTO();

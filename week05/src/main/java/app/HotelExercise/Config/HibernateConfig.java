@@ -1,9 +1,7 @@
 package app.HotelExercise.Config;
+
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
-
-import java.util.Properties;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -11,6 +9,8 @@ import org.hibernate.service.ServiceRegistry;
 
 import app.HotelExercise.Entities.Hotel;
 import app.HotelExercise.Entities.Room;
+
+import java.util.Properties;
 
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
@@ -36,9 +36,27 @@ public class HibernateConfig {
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
             props.put("hibernate.archive.autodetection", "class"); // hibernate scans for annotated classes
             props.put("hibernate.current_session_context_class", "thread"); // hibernate current session context
-            props.put("hibernate.hbm2ddl.auto", "update"); // hibernate creates tables based on entities
+            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on entities
 
 
+            return getEntityManagerFactory(configuration, props);
+        } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+    private static EntityManagerFactory setupHibernateConfigurationForTesting() {
+        try {
+            Configuration configuration = new Configuration();
+            Properties props = new Properties();
+            props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+            props.put("hibernate.connection.driver_class", "org.testcontainers.jdbc.ContainerDatabaseDriver");
+            props.put("hibernate.connection.url", "jdbc:tc:postgresql:15.3-alpine3.18:///test-db");
+            props.put("hibernate.connection.username", "postgres");
+            props.put("hibernate.connection.password", "postgres");
+            props.put("hibernate.archive.autodetection", "class");
+            props.put("hibernate.show_sql", "true");
+            props.put("hibernate.hbm2ddl.auto", "create-drop");
             return getEntityManagerFactory(configuration, props);
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
@@ -64,41 +82,14 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Room.class);
     }
 
-    private static EntityManagerFactory getEntityManagerFactoryConfigDefault(String name) {
+    public static EntityManagerFactory getEntityManagerFactoryConfig(String name, boolean testing) {
         dbName = name;
-        if (entityManagerFactory == null) entityManagerFactory = buildEntityFactoryConfig();
-        return entityManagerFactory;
-    }
-
-    private static EntityManagerFactory getEntityManagerFactoryConfigTest(String name) {
-        dbName = name;
-        if (entityManagerFactory == null) entityManagerFactory = buildEntityFactoryConfig();
-        return entityManagerFactory;
-    }
-
-    public static EntityManagerFactory getEntityManagerFactoryConfig(String name, boolean isTest) {
-        if(isTest){
-            return getEntityManagerFactoryConfigTest(name);
-        }
-        return getEntityManagerFactoryConfigDefault(name);
-    }
-
-    private static EntityManagerFactory setupHibernateConfigurationForTesting() {
-        try {
-            Configuration configuration = new Configuration();
-            Properties props = new Properties();
-            props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-            props.put("hibernate.connection.driver_class", "org.testcontainers.jdbc.ContainerDatabaseDriver");
-            props.put("hibernate.connection.url", "jdbc:tc:postgresql:15.3-alpine3.18:///test-db");
-            props.put("hibernate.connection.username", "postgres");
-            props.put("hibernate.connection.password", "postgres");
-            props.put("hibernate.archive.autodetection", "class");
-            props.put("hibernate.show_sql", "true");
-            props.put("hibernate.hbm2ddl.auto", "create-drop");
-            return getEntityManagerFactory(configuration, props);
-        } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+        if(testing){
+            if (entityManagerFactory == null) entityManagerFactory = setupHibernateConfigurationForTesting();
+            return entityManagerFactory;
+        } else {
+            if (entityManagerFactory == null) entityManagerFactory = buildEntityFactoryConfig();
+            return entityManagerFactory;
         }
     }
 }
