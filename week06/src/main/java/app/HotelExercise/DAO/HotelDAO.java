@@ -1,6 +1,5 @@
 package app.HotelExercise.DAO;
 
-import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.Entities.Hotel;
 import app.HotelExercise.Entities.Room;
 import jakarta.persistence.EntityManager;

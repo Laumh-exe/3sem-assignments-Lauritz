@@ -4,10 +4,8 @@ import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.Controller.HotelController;
 import app.HotelExercise.Controller.RoomController;
 import io.javalin.apibuilder.EndpointGroup;
-import jakarta.persistence.EntityManagerFactory;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
-import static org.hibernate.Hibernate.*;
 
 public class Routes {
     
