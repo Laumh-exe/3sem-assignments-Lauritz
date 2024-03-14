@@ -1,61 +1,68 @@
 package app.HotelExercise.Entities;
 
 import app.HotelExercise.ISecurityUser;
-import app.HotelExercise.BCrypt.BCrypt;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "user")
+@AllArgsConstructor
+@Getter
+@Table(name = "users")
 public class User implements ISecurityUser {
-    
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        int id;
 
-        @Column(name = "username")
-        String username;
+    @Id
+    @Column(name = "username", length = 50, nullable = false, unique = true)
+    String username;
 
-        @Column(name = "password")
-        String password;
-    
-        @ManyToMany(mappedBy = "users")
-        Set<Role> roles = new HashSet<>();
+    @Column(name = "password")
+    String password;
 
-          public User(String username, String password) {
-                this.username = username;
-                this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-          }        
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    Set<Role> roles = new HashSet<>();
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
 
 
-        public Set<String> getRolesAsStrings() {
-            return null;
+    public Set<String> getRolesAsStrings() {
+        Set<String> rolesAsStrings = new HashSet<>();
+        for (Role role : roles) {
+            rolesAsStrings.add(role.getRole());
         }
+        return rolesAsStrings;
+    }
 
-        public boolean verifyPassword(String pw) {
-            return BCrypt.checkpw(pw, this.password);
-        }
+    public boolean verifyPassword(String pw) {
+        return BCrypt.checkpw(pw, this.password);
+    }
 
-        public void addRole(Role role) {
-            if(role != null) {
-                role.addUser(this);
+    public void addRole(Role role) {
+        if (role != null) {
+            if (!roles.contains(role)) {
                 roles.add(role);
             }
-            
-        }
-
-        public void removeRole(String role) {
-            for(Role r : roles) {
-                if(r.getRole().equals(role)) {
-                    roles.remove(r);
-                    break;
-                }
+            if (!role.getUsers().contains(this)) {
+                role.addUser(this);
             }
         }
-    
+
+    }
+
+    public void removeRole(String role) {
+        for (Role r : roles) {
+            if (r.getRole().equals(role)) {
+                roles.remove(r);
+                break;
+            }
+        }
+    }
 }

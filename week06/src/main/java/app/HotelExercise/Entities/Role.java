@@ -31,10 +31,18 @@ public class Role {
 
     String role;
 
+    public Role(String role) {
+        this.role = role;
+    }
+
     public void addUser(User user) {
         if(user != null) {
-            user.addRole(this);
-            users.add(user);
+            if(!users.contains(user)) {
+                users.add(user);
+            }
+            if(!user.getRoles().contains(this)) {
+                user.addRole(this);
+            }
         }
     }
 }

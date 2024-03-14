@@ -2,8 +2,11 @@ package app.HotelExercise;
 
 import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.DAO.HotelDAO;
+import app.HotelExercise.DAO.UserDAO;
 import app.HotelExercise.Entities.Hotel;
+import app.HotelExercise.Entities.Role;
 import app.HotelExercise.Entities.Room;
+import app.HotelExercise.Entities.User;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ public class Main {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
 
         HotelDAO hotelDAO = HotelDAO.getHotelDAOInstance(emf);
+        UserDAO userDAO = UserDAO.getUserDAOInstance(emf);
 
         // //SETUP ENTITIES
         Hotel hotel1 = new Hotel();
@@ -33,6 +37,11 @@ public class Main {
         hotel3.setAddress("Hotel 3 Street 123");
         hotel3 = hotelDAO.create(hotel3);
         generateRooms(hotel3);
+
+        User user = new User("admin", "admin");
+        user.addRole(new Role("admin"));
+        userDAO.createUser("admin",  "admin");
+
  
         startServer(7070);
     }
@@ -41,7 +50,7 @@ public class Main {
         //JAVALIN SETUP
         Routes routes = new Routes();
         ApplicationConfig applicationConfig = ApplicationConfig.getInstance();
-        applicationConfig.initiateServer().startServer(port).errorHandling().setRoute(routes.getHotelResource());
+        applicationConfig.initiateServer().startServer(port).errorHandling().setRoute(routes.getUserResource());
     }
 
     public static void stopServer() {

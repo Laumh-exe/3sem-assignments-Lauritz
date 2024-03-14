@@ -1,7 +1,9 @@
 package app.HotelExercise.Config;
 
 import app.HotelExercise.Entities.Hotel;
+import app.HotelExercise.Entities.Role;
 import app.HotelExercise.Entities.Room;
+import app.HotelExercise.Entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -79,6 +81,8 @@ public class HibernateConfig {
         // add annotated classes
         configuration.addAnnotatedClass(Hotel.class);
         configuration.addAnnotatedClass(Room.class);
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Role.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name, boolean testing) {

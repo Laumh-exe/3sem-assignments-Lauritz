@@ -1,0 +1,10 @@
+### Get All Users
+GET localhost:7070/api/user/
+
+### Create User
+POST localhost:7070/api/user/create
+Content-Type: application/json
+{
+    "username": "test",
+    "password": "test"
+}
