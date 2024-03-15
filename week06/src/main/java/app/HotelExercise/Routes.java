@@ -3,9 +3,10 @@ package app.HotelExercise;
 import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.Controller.HotelController;
 import app.HotelExercise.Controller.RoomController;
-import app.HotelExercise.Controller.UserController;
-import app.HotelExercise.DAO.UserDAO;
+import app.HotelExercise.Controller.SecurityController;
+import app.HotelExercise.Entities.doesntwork;
 import io.javalin.apibuilder.EndpointGroup;
+import io.javalin.security.RouteRole;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -35,15 +36,29 @@ public class Routes {
     }
 
     public EndpointGroup getUserResource() {
-        UserController userController = new UserController(HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false));
+        SecurityController securityController = new SecurityController(HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false));
         return () -> {
             path("/user", () -> {
-                get("/", userController.getAllUsers());
-                post("/login", userController.login());
-                post("/create", userController.createUser());
-                post("/role", userController.createRole());
+                get("/", securityController.getAllUsers());
+                post("/login", securityController.login());
+                post("/create", securityController.createUser());
+                post("/role", securityController.createRole());
             });
 
         };
     }
+
+public static EndpointGroup getSecuredRoutes(){
+    SecurityController securityController = new SecurityController(HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false));
+    return ()->{
+        path("/protected", ()->{
+            before(securityController.authenticate());
+            get("/user_demo",(ctx)->ctx.json(jsonMapper.createObjectNode().put("msg",  "Hello from USER Protected")),Role.USER);
+            get("/admin_demo",(ctx)->ctx.json(jsonMapper.createObjectNode().put("msg",  "Hello from ADMIN Protected")),Role.ADMIN);
+        });
+    };
+}
+public enum Role implements RouteRole { ANYONE, USER, ADMIN }
+
+
 }

@@ -25,7 +25,7 @@ public class User implements ISecurityUser {
     String password;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    Set<Role> roles = new HashSet<>();
+    Set<doesntwork> roles = new HashSet<>();
 
     public User(String username, String password) {
         this.username = username;
@@ -35,8 +35,8 @@ public class User implements ISecurityUser {
 
     public Set<String> getRolesAsStrings() {
         Set<String> rolesAsStrings = new HashSet<>();
-        for (Role role : roles) {
-            rolesAsStrings.add(role.getRole());
+        for (doesntwork role : roles) {
+            rolesAsStrings.add(role.name());
         }
         return rolesAsStrings;
     }
@@ -45,21 +45,18 @@ public class User implements ISecurityUser {
         return BCrypt.checkpw(pw, this.password);
     }
 
-    public void addRole(Role role) {
+    public void addRole(doesntwork role) {
         if (role != null) {
             if (!roles.contains(role)) {
                 roles.add(role);
-            }
-            if (!role.getUsers().contains(this)) {
-                role.addUser(this);
             }
         }
 
     }
 
     public void removeRole(String role) {
-        for (Role r : roles) {
-            if (r.getRole().equals(role)) {
+        for (doesntwork r : roles) {
+            if (r.name().equals(role)) {
                 roles.remove(r);
                 break;
             }
