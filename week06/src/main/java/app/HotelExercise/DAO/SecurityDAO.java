@@ -2,24 +2,24 @@ package app.HotelExercise.DAO;
 
 
 import app.HotelExercise.ISecurityDAO;
-import app.HotelExercise.Entities.Role;
+import app.HotelExercise.Entities.doesntwork;
 import app.HotelExercise.Entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
-public class UserDAO implements ISecurityDAO{
+public class SecurityDAO implements ISecurityDAO{
 
-    private static UserDAO instance;
+    private static SecurityDAO instance;
     private static EntityManagerFactory emf;
 
-    private UserDAO() {
+    private SecurityDAO() {
     }
 
-    public static UserDAO getUserDAOInstance(EntityManagerFactory emf_) {
+    public static SecurityDAO getUserDAOInstance(EntityManagerFactory emf_) {
         if (instance == null) {
-            instance = new UserDAO();
+            instance = new SecurityDAO();
                 emf = emf_;
         }
         return instance;
@@ -56,10 +56,10 @@ public class UserDAO implements ISecurityDAO{
         }
     }
 
-    public Role createRole(String role) {
+    public doesntwork createRole(doesntwork role) {
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Role newRole = new Role(role);
+            doesntwork newRole = role;
             em.persist(newRole);
             em.getTransaction().commit();
             return newRole;
@@ -70,10 +70,16 @@ public class UserDAO implements ISecurityDAO{
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             User user = em.find(User.class, username);
-            user.addRole(em.find(Role.class, role));
+            user.addRole(em.find(doesntwork.class, role));
             em.merge(user);
             em.getTransaction().commit();
             return user;
         }
+    }
+
+    @Override
+    public doesntwork createRole(String role) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createRole'");
     }
 }

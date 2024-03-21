@@ -2,9 +2,6 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
-- which one are completed and which one are not
+Lauritz Hauge 
 
-## Friday presentation
-- add the friday presentation into the weekly folder
+I was in the hospital for most of the week and this exercise is confusing and the explanation is contradicting with the code examples. Most of the code doesnt make much sense and it doesnt compile but I tried to do what i had time to do...

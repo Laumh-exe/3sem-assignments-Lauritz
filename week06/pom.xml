@@ -19,6 +19,9 @@
         <hamcrest.version>2.0.0.0</hamcrest.version>
         <restassured.version>5.3.0</restassured.version>
         <jbcrypt.version>0.4</jbcrypt.version>
+          <jackson.version>2.4.4</jackson.version>
+
+
     </properties>
 
     <dependencies>
@@ -78,7 +81,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.16.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -125,6 +128,11 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.37.3</version>
         </dependency>
     </dependencies>
 

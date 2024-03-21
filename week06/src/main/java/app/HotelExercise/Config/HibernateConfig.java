@@ -1,7 +1,7 @@
 package app.HotelExercise.Config;
 
 import app.HotelExercise.Entities.Hotel;
-import app.HotelExercise.Entities.Role;
+import app.HotelExercise.Entities.doesntwork;
 import app.HotelExercise.Entities.Room;
 import app.HotelExercise.Entities.User;
 import jakarta.persistence.EntityManagerFactory;
@@ -82,7 +82,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Hotel.class);
         configuration.addAnnotatedClass(Room.class);
         configuration.addAnnotatedClass(User.class);
-        configuration.addAnnotatedClass(Role.class);
+        configuration.addAnnotatedClass(doesntwork.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name, boolean testing) {

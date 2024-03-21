@@ -2,9 +2,9 @@ package app.HotelExercise;
 
 import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.DAO.HotelDAO;
-import app.HotelExercise.DAO.UserDAO;
+import app.HotelExercise.DAO.SecurityDAO;
 import app.HotelExercise.Entities.Hotel;
-import app.HotelExercise.Entities.Role;
+import app.HotelExercise.Entities.doesntwork;
 import app.HotelExercise.Entities.Room;
 import app.HotelExercise.Entities.User;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,7 +17,7 @@ public class Main {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
 
         HotelDAO hotelDAO = HotelDAO.getHotelDAOInstance(emf);
-        UserDAO userDAO = UserDAO.getUserDAOInstance(emf);
+        SecurityDAO securityDAO = SecurityDAO.getUserDAOInstance(emf);
 
         // //SETUP ENTITIES
         Hotel hotel1 = new Hotel();
@@ -39,8 +39,8 @@ public class Main {
         generateRooms(hotel3);
 
         User user = new User("admin", "admin");
-        user.addRole(new Role("admin"));
-        userDAO.createUser("admin",  "admin");
+        user.addRole(doesntwork.ADMIN);
+        securityDAO.createUser("admin",  "admin");
 
  
         startServer(7070);
