@@ -1,0 +1,48 @@
+@port = 7170
+@root = http://localhost:{{port}}/api
+@adminToken = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXVyaXR6IEhhdWdlIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MTA5Njc0NDYsInJvbGVzIjoiLGFkbWluLHVzZXIiLCJ1c2VybmFtZSI6ImFkbWluIn0.-f10WxSmbmktKRKsPlTYSHUnSq6DxnNWSCIrdPmkg7M
+@userToken = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXVyaXR6IEhhdWdlIiwic3ViIjoiSGVucmlrIiwiZXhwIjoxNzEwOTY3NjMwLCJyb2xlcyI6Iix1c2VyIiwidXNlcm5hbWUiOiJIZW5yaWsifQ.vV5HWJiw9J9bparCV8U2hLXZx-X_WZjsqYgGF8wtI8k
+
+
+## Requires user authentication
+GET {{root}}/hotel/
+
+### Doesn't require user authentication
+
+GET {{root}}/room
+
+### Requires admin authentication
+
+GET {{root}}/room/1
+
+## Login as user
+
+POST {{root}}/auth/login
+Content-Type: application/json
+
+{
+"username": "Henrik",
+"password": "1234"
+}
+
+## Login as admin
+
+POST {{root}}/auth/login
+Content-Type: application/json
+
+{
+"username": "admin",
+"password": "admin"
+}
+
+## Tests admin token
+
+GET {{root}}/room/1
+Authorization: Bearer {{adminToken}}
+
+## Tests user token
+
+GET {{root}}/hotel/
+Authorization: Bearer {{userToken}}
+
+

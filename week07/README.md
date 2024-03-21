@@ -2,9 +2,10 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
-- which one are completed and which one are not
+Lauritz Hauge
+
+All exercises completed. Part 5 i split up into SecurityController and TokenUtils
+
 
 ## Friday presentation
 - add the friday presentation into the weekly folder
