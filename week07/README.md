@@ -4,8 +4,5 @@
 
 Lauritz Hauge
 
-All exercises completed. Part 5 i split up into SecurityController and TokenUtils
-
-
-## Friday presentation
-- add the friday presentation into the weekly folder
+Tasks done..
+DB name is set in POM.xml. 
