@@ -15,6 +15,10 @@ GET {{root}}/room
 
 GET {{root}}/room/1
 
+##
+
+GET {{root}}/hotel/1
+
 ## Login as user
 
 POST {{root}}/auth/login

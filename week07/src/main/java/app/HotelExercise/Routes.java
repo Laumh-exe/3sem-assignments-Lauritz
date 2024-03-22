@@ -1,5 +1,6 @@
 package app.HotelExercise;
 import io.javalin.apibuilder.EndpointGroup;
+import jakarta.persistence.EntityManagerFactory;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -10,13 +11,18 @@ import app.HotelExercise.Controller.RoomController;
 import app.HotelExercise.Controller.SecurityController;
 
 public class Routes {
-    private static HotelController hotelController = new HotelController();
-    private static RoomController roomController = new RoomController();
+    private static HotelController hotelController;
+    private static RoomController roomController;
     private static SecurityController securityController;
     private static ObjectMapper om = new ObjectMapper();
+
+    public Routes(EntityManagerFactory emf) {
+        hotelController = new HotelController(emf);
+        roomController = new RoomController(emf);
+        securityController = new SecurityController(emf);
+    }
     
-    public static EndpointGroup getHotelResource(SecurityController _securityController) {
-        securityController = _securityController;
+    public EndpointGroup getHotelResource() {
         return () -> {
             before(securityController.authenticate());
             path("/hotel", () -> {
@@ -39,8 +45,7 @@ public class Routes {
         };      
     }
 
-    public static EndpointGroup securityRoutes(SecurityController _securityController) {
-        securityController = _securityController;
+    public EndpointGroup securityRoutes() {
         return ()->{
             path("/auth", ()->{
                 post("/login", securityController.login(),SecurityRoles.ANYONE);
@@ -49,8 +54,7 @@ public class Routes {
         };
     }
 
-    public static EndpointGroup securedRoutes(SecurityController _securityController){
-        securityController = _securityController;
+    public EndpointGroup securedRoutes(){
         return ()->{
             path("/protected", ()->{
                 before(securityController.authenticate());

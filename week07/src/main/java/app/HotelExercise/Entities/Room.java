@@ -1,4 +1,6 @@
 package app.HotelExercise.Entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import app.HotelExercise.DTO.RoomDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -23,6 +25,7 @@ public class Room {
     @Column(name = "id")
     private int id;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id")
     private Hotel hotelID;

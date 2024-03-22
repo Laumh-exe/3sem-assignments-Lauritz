@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import app.HotelExercise.DTO.HotelDTO;
 import app.HotelExercise.DTO.RoomDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,12 +37,19 @@ public class Hotel {
     @Column(name = "address")
     private String address;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "hotelID", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     private Set<Room> rooms = new HashSet<>();
 
     public Hotel(String name, String address) {
         this.name = name;
         this.address = address;
+    }
+
+    public Hotel(HotelDTO hotelDTO) {
+        this.id = hotelDTO.getId();
+        this.name = hotelDTO.getName();
+        this.address = hotelDTO.getAddress();
     }
     
     public Map<Integer , RoomDTO> getRoomsAsDTO(){

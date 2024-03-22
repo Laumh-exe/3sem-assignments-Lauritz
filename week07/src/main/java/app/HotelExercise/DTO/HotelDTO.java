@@ -1,5 +1,7 @@
 package app.HotelExercise.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import app.HotelExercise.Entities.Hotel;
@@ -18,5 +20,13 @@ public class HotelDTO {
         this.name = hotel.getName();
         this.address = hotel.getAddress();
         this.rooms = hotel.getRoomsAsDTO();
+    }
+
+    public static List<HotelDTO> toHotelDTOList(List<Hotel> resultList) {
+        List<HotelDTO> hotelDTOs = new ArrayList<>(); // Initialize the list
+        for (Hotel hotel : resultList) {
+            hotelDTOs.add(new HotelDTO(hotel));
+        }
+        return hotelDTOs;
     }
 }

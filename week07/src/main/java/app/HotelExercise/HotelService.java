@@ -1,18 +1,18 @@
-package app.HotelExercise;
+// package app.HotelExercise;
 
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 
-import app.HotelExercise.Entities.Hotel;
-import lombok.Getter;
-import lombok.Setter;
+// import app.HotelExercise.Entities.HotelDTO;
+// import lombok.Getter;
+// import lombok.Setter;
 
-@Getter
-@Setter
-public class HotelService {
-    public static List<Hotel> hotels = new ArrayList<Hotel>();
+// @Getter
+// @Setter
+// public class HotelService {
+//     public static List<HotelDTO> hotels = new ArrayList<HotelDTO>();
     
-    public static void addHotel(Hotel hotel) {
-        hotels.add(hotel);
-    }
-}
+//     public static void addHotel(HotelDTO hotel) {
+//         hotels.add(hotel);
+//     }
+// }

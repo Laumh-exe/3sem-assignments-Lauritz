@@ -8,9 +8,9 @@ import java.util.List;
 
 import app.HotelExercise.Config.ApplicationConfig;
 import app.HotelExercise.Config.HibernateConfig;
-import app.HotelExercise.Controller.SecurityController;
 import app.HotelExercise.DAO.HotelDAO;
 import app.HotelExercise.DAO.UserDAO;
+import app.HotelExercise.DTO.HotelDTO;
 import app.HotelExercise.Entities.Hotel;
 import app.HotelExercise.Entities.Room;
 import app.HotelExercise.Exceptions.EntityNotFoundException;
@@ -22,15 +22,15 @@ public class Main {
     private static DemoController demoController = new DemoController();
 
     public static void main(String[] args) throws EntityNotFoundException {
-        removeAll();
-        setupEntities(HibernateConfig.getEntityManagerFactory());
+        //removeAll();
+        //setupEntities(HibernateConfig.getEntityManagerFactory(false));
 
         // JAVALIN SETUP
-        startServer(HibernateConfig.getEntityManagerFactory());
+        startServer(HibernateConfig.getEntityManagerFactory(false));
     }
 
     public static void removeAll() {
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory(false);
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("DELETE FROM Role").executeUpdate();
@@ -48,15 +48,15 @@ public class Main {
     }
 
     public static void startServer(EntityManagerFactory emf) {
-        SecurityController securityController = new SecurityController(emf);
         ApplicationConfig applicationConfig = ApplicationConfig.getInstance(emf);
+        Routes routes = new Routes(emf);
         applicationConfig
                 .initiateServer()
                 .startServer(port)
                 .setExceptionHandling()
-                .setRoute(Routes.getHotelResource(securityController))
-                .setRoute(Routes.securityRoutes(securityController))
-                .setRoute(Routes.securedRoutes(securityController))
+                .setRoute(routes.getHotelResource())
+                .setRoute(routes.securityRoutes())
+                .setRoute(routes.securedRoutes())
                 .checkSecurityRoles()
                 .setRoute(() -> {
                     path("/demo", () -> {
@@ -76,25 +76,24 @@ public class Main {
         hotel1.setName("Hotel California");
         hotel1.setAddress("California Street 123");
         hotel1 = hotelDAO.create(hotel1); // This is so we generate ID
-        hotelDAO.addRooms(hotel1,generateRooms(hotel1));
+        hotelDAO.addRooms(new HotelDTO(hotel1), generateRooms(hotel1));
 
         Hotel hotel2 = new Hotel();
         hotel2.setName("Hilton");
         hotel2.setAddress("Hilton Street 123");
         hotel2 = hotelDAO.create(hotel2);
-        hotelDAO.addRooms(hotel2,generateRooms(hotel2));
+        hotelDAO.addRooms(new HotelDTO(hotel2), generateRooms(hotel2));
 
         Hotel hotel3 = new Hotel();
         hotel3.setName("Hotel 3");
         hotel3.setAddress("Hotel 3 Street 123");
         hotel3 = hotelDAO.create(hotel3);
-        hotelDAO.addRooms(hotel3,generateRooms(hotel3));
-
+        hotelDAO.addRooms(new HotelDTO(hotel3), generateRooms(hotel3));
 
         userDAO.createRole("user");
-        userDAO.createUser("admin","admin");
-        userDAO.addRoleToUser("admin", "admin");  
-        userDAO.createUser("Henrik","1234");
+        userDAO.createUser("admin", "admin");
+        userDAO.addRoleToUser("admin", "admin");
+        userDAO.createUser("Henrik", "1234");
     }
 
     public static List<Room> generateRooms(Hotel hotel) {

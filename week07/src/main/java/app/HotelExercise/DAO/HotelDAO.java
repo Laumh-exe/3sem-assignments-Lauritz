@@ -1,12 +1,14 @@
 package app.HotelExercise.DAO;
 
 import java.util.List;
+
+import app.HotelExercise.DTO.HotelDTO;
 import app.HotelExercise.Entities.Hotel;
 import app.HotelExercise.Entities.Room;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-public class HotelDAO extends ADAO<Hotel, Integer> {
+public class HotelDAO extends ADAO<Hotel, HotelDTO, Integer> {
     private static EntityManagerFactory emf;
     private static HotelDAO instance;
 
@@ -38,14 +40,15 @@ public class HotelDAO extends ADAO<Hotel, Integer> {
     }
 
     @Override
-    public List<Hotel> getAll() {
+    public List<HotelDTO> getAll() {
         try (var em = emf.createEntityManager()) {
             var query = em.createQuery("SELECT h FROM Hotel h", Hotel.class);
-            return query.getResultList();
+            return HotelDTO.toHotelDTOList(query.getResultList());
         }
     }
 
-    public void addRooms(Hotel hotel, List<Room> rooms) {
+    public void addRooms(HotelDTO hotelDTO, List<Room> rooms) {
+        Hotel hotel = new Hotel(hotelDTO);
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             hotel = em.merge(hotel); // merge the hotel into the current session

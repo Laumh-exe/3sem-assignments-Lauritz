@@ -1,16 +1,18 @@
 package app.HotelExercise.Controller;
-
-import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.DAO.RoomDAO;
-import app.HotelExercise.DTO.RoomDTO;
 import app.HotelExercise.Entities.Room;
 import io.javalin.http.Handler;
+import jakarta.persistence.EntityManagerFactory;
 
 public class RoomController {
-    RoomDAO roomDAO = RoomDAO.getRoomDAOInstance(HibernateConfig.getEntityManagerFactory());
+    RoomDAO roomDAO;
+
+    public RoomController(EntityManagerFactory emf) {
+        roomDAO = RoomDAO.getRoomDAOInstance(emf);
+    }
 
     public Handler getAllRooms() {
-        RoomDTO[] rooms = roomDAO.getAll().stream().map(RoomDTO::new).toArray(RoomDTO[]::new);
+        var rooms = roomDAO.getAll();
         return ctx -> ctx.json(rooms);
         
     }
@@ -18,7 +20,7 @@ public class RoomController {
     public Handler getRoomById() {
         return ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
-            ctx.json(new RoomDTO(roomDAO.getByID(id)));
+            ctx.json(roomDAO.getByID(id));
         };
     }
 
@@ -33,6 +35,7 @@ public class RoomController {
     public Handler deleteRoom() {
         return ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
+
             roomDAO.delete(roomDAO.getByID(id));
             ctx.status(204);
         };

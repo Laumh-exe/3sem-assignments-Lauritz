@@ -1,34 +1,35 @@
 package app.HotelExercise.Controller;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import app.HotelExercise.Config.HibernateConfig;
 import app.HotelExercise.DAO.HotelDAO;
 import app.HotelExercise.DTO.HotelDTO;
 import app.HotelExercise.Entities.Hotel;
 import io.javalin.http.Handler;
+import jakarta.persistence.EntityManagerFactory;
 
 public class HotelController {
-    HotelDAO hotelDAO = HotelDAO.getHotelDAOInstance(HibernateConfig.getEntityManagerFactory());
+    HotelDAO hotelDAO;
+    ObjectMapper om = new ObjectMapper();
 
-    public HotelController() {
-        
+    public HotelController(EntityManagerFactory emf) {
+        hotelDAO = HotelDAO.getHotelDAOInstance(emf);
     }
 
     public Handler getAllHotels() {
-        HotelDTO[] hotels = hotelDAO.getAll().stream().map(HotelDTO::new).toArray(HotelDTO[]::new);
-        return ctx -> ctx.json(hotels);
+        return ctx -> ctx.json(hotelDAO.getAll());
     }
 
     public Handler getHotelById() {
         return ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
-            ctx.json(new HotelDTO(hotelDAO.getByID(id)));
+            ctx.json(hotelDAO.getByID(id));
         };
     }
 
     public Handler getRoomsByHotelId() {
         return ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
-            ctx.json(hotelDAO.getByID(id).getRoomsAsDTO());
+            ctx.json(hotelDAO.getByID(id).getRooms());
         };
     }
 

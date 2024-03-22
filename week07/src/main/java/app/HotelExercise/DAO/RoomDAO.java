@@ -2,12 +2,14 @@ package app.HotelExercise.DAO;
 
 import java.util.List;
 
+import app.HotelExercise.DTO.RoomDTO;
 import app.HotelExercise.Entities.Room;
 import jakarta.persistence.EntityManagerFactory;
 
-public class RoomDAO extends ADAO<Room, Integer> {
+public class RoomDAO extends ADAO<Room, RoomDTO, Integer> {
     private static EntityManagerFactory emf;
     private static RoomDAO instance;
+    
     private RoomDAO() {}
     public static RoomDAO getRoomDAOInstance(EntityManagerFactory _emf) {
         if (instance == null) {
@@ -35,10 +37,11 @@ public class RoomDAO extends ADAO<Room, Integer> {
     }
 
     @Override
-    public List<Room> getAll() {
+    public List<RoomDTO> getAll() {
         try (var em = emf.createEntityManager()) {
             var query = em.createQuery("SELECT r FROM Room r", Room.class);
-            return query.getResultList();
+            //Turn list of rooms to list of roomDTOs
+            return RoomDTO.toRoomDTOList(query.getResultList());
         }
     }
 }

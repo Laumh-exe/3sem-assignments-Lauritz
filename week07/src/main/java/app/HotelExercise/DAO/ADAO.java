@@ -3,7 +3,7 @@ package app.HotelExercise.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-public abstract class ADAO<T, ID> implements IDAO<T, ID> {
+public abstract class ADAO<T, DTO, ID> implements IDAO<T, DTO, ID> {
 
     protected static EntityManagerFactory emf;
 

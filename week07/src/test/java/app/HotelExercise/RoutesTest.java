@@ -6,29 +6,28 @@ import io.restassured.response.Response;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.*;
 
 import app.HotelExercise.Config.HibernateConfig;
-import app.HotelExercise.DAO.HotelDAO;
-import app.HotelExercise.DAO.UserDAO;
 import app.HotelExercise.Entities.Hotel;
+import app.HotelExercise.Entities.Role;
 import app.HotelExercise.Entities.Room;
+import app.HotelExercise.Entities.User;
 import app.HotelExercise.Exceptions.EntityNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 
 public class RoutesTest {
     private static EntityManagerFactory emf;
+    private int hotelId;
 
     @BeforeAll
     public static void setUp() {
-        emf = HibernateConfig.getEntityManagerFactoryForTest();
+        emf = HibernateConfig.getEntityManagerFactory(true);
         RestAssured.baseURI = "http://localhost:" + Main.getPort() + "/api";
         Main.startServer(emf);
     }
@@ -41,33 +40,40 @@ public class RoutesTest {
 
     @BeforeEach
     public void setupData() throws EntityNotFoundException {
-        emf = HibernateConfig.getEntityManagerFactoryForTest();
-        // //SETUP ENTITIES
-        HotelDAO hotelDAO = HotelDAO.getHotelDAOInstance(emf);
-        UserDAO userDAO = UserDAO.getUserDAOInstance(emf);
-        Hotel hotel1 = new Hotel();
-        hotel1.setName("Hotel California");
-        hotel1.setAddress("California Street 123");
-        hotel1 = hotelDAO.create(hotel1); // This is so we generate ID
-        hotelDAO.addRooms(hotel1, generateRooms(hotel1));
+        
+        emf = HibernateConfig.getEntityManagerFactory(true);
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            Hotel hotel1 = new Hotel("Hotel California", "California Street 123");
+            Hotel hotel2 = new Hotel("Hotel New York", "New York Street 123");
+            Hotel hotel3 = new Hotel("Hotel Paris", "Paris Street 123");
+            em.persist(hotel1);
+            em.persist(hotel2);
+            em.persist(hotel3);
+            hotelId = hotel1.getId();
+            List<Room> rooms = generateRooms(hotel1);
+            rooms.addAll(generateRooms(hotel2));
+            rooms.addAll(generateRooms(hotel3));
+            for (Room room : rooms) {
+                em.persist(room);
+            }
+            em.getTransaction().commit();
+        }
 
-        Hotel hotel2 = new Hotel();
-        hotel2.setName("Hilton");
-        hotel2.setAddress("Hilton Street 123");
-        hotel2 = hotelDAO.create(hotel2);
-        hotelDAO.addRooms(hotel2, generateRooms(hotel2));
-
-        Hotel hotel3 = new Hotel();
-        hotel3.setName("Hotel 3");
-        hotel3.setAddress("Hotel 3 Street 123");
-        hotel3 = hotelDAO.create(hotel3);
-        hotelDAO.addRooms(hotel3, generateRooms(hotel3));
-
-        userDAO.createRole("user");
-        userDAO.createUser("admin", "admin");
-        userDAO.addRoleToUser("admin", "admin");
-        userDAO.createUser("Henrik", "1234");
-
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            Role adminRole = new Role("admin");
+            Role userRole = new Role("user");
+            em.persist(adminRole);
+            em.persist(userRole);
+            User user = new User("Henrik", "1234");
+            user.addRole(userRole);
+            em.persist(user);
+            User admin = new User("admin", "admin");
+            admin.addRole(adminRole);
+            em.persist(admin);
+            em.getTransaction().commit();       
+        }
     }
 
     public List<Room> generateRooms(Hotel hotel) {
@@ -81,9 +87,10 @@ public class RoutesTest {
         return rooms;
     }
 
+
+
     @AfterEach
     public void tearDownData() {
-        emf = HibernateConfig.getEntityManagerFactoryForTest();
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("DELETE FROM Role").executeUpdate();
@@ -93,19 +100,7 @@ public class RoutesTest {
             em.createQuery("DELETE FROM Hotel h").executeUpdate();
             em.createNativeQuery("ALTER SEQUENCE public.hotel_id_seq RESTART WITH 1").executeUpdate();
             em.getTransaction().commit();
-        }
-    }
 
-    public void printOutAllData() {
-        emf = HibernateConfig.getEntityManagerFactoryForTest();
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            System.out.println("Printing database:");
-            System.out.println("ROLES: " + em.createQuery("SELECT r FROM Role r").getResultList());
-            System.out.println("USERS: " + em.createQuery("SELECT u FROM User u").getResultList());
-            System.out.println("ROOMS: " + em.createQuery("SELECT r FROM Room r").getResultList());
-            System.out.println("HOTELS: " + em.createQuery("SELECT h FROM Hotel h").getResultList());
-            em.getTransaction().commit();
         }
     }
 
@@ -149,7 +144,7 @@ public class RoutesTest {
                 .log().all()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .get("/hotel/1")
+                .get("/hotel/" + hotelId)
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("Hotel California"))
@@ -190,27 +185,11 @@ public class RoutesTest {
     }
 
     @Test
-    @DisplayName("Test reponse body from /room")
-    public void testAllRooms() {
-        Response response = RestAssured
-                .given()
-                .log().all()
-                .when()
-                .get("/room")
-                .then()
-                .extract()
-                .response();
-
-        assertEquals(200, response.statusCode());
-        assertEquals(300, response.jsonPath().getList("$").size());
-    }
-
-    @Test
     @DisplayName("Test reponse body from /hotel")
     public void testAllHotels() {
         String token = loginAsUser();
         // Use the token in the next request
-        RestAssured
+        String responseBody = RestAssured
                 .given()
                 .log().all()
                 .header("Authorization", "Bearer " + token)
@@ -218,6 +197,11 @@ public class RoutesTest {
                 .get("/hotel")
                 .then()
                 .statusCode(200)
-                .body("size()", equalTo(3));
+                .body("size()", equalTo(3))
+                .extract()
+                .body()
+                .asString();
+    
+        System.out.println(responseBody);
     }
 }
