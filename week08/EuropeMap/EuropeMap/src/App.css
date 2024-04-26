@@ -1,0 +1,30 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.map {
+  display: block;
+  margin: auto;
+max-width: 100%;
+  height: auto;
+  border: 4px solid white;
+  border-radius: 3rem;
+}
+
+.map #country {
+  fill: silver;
+  stroke: black;
+  stroke-width: 1;
+}
+
+.map path:hover {
+  fill: red;
+}
