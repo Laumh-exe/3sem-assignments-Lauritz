@@ -1,0 +1,36 @@
+GET http://localhost:3000/api
+
+###
+
+GET http://localhost:3000/api/2
+
+###
+
+POST http://localhost:3000/api
+Content-Type: application/json
+Accept: application/application/json
+
+{
+    "age": "22",
+    "name": "Steve",
+    "email": "steve@test.com",
+    "gender": "male"
+  }
+
+###
+
+PUT http://localhost:3000/api/2
+Content-Type: application/json
+Accept: application/json
+
+{
+    "age": "22",
+    "name": "Steve",
+    "email": "steve@gmail.com",
+    "gender": "male"
+}
+
+### 
+
+DELETE http://localhost:3000/api/6
+Accept: application/json

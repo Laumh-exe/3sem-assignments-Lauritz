@@ -34,7 +34,7 @@ function returnHTML(names) {
     html += names.join("");
     html += "<ul>";
     return html;
-}
+} 
 
 //1.5.2
 const form = document.getElementById("form");

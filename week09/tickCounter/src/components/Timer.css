@@ -1,0 +1,42 @@
+/* Timer.css */
+input {
+  margin: 10px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+#presets {
+  margin: 0px !important;
+}
+
+button {  margin: 5px;
+  padding: 5px;
+  font-size: 18px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#start_stop{
+  margin: 10px;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#time {
+  font-size: 3rem;
+  font-weight: bold;
+}
+

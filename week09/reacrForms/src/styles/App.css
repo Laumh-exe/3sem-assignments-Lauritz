@@ -1,0 +1,23 @@
+/* body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid;
+}
+
+
+.main {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-start; 
+  height: 100vh;
+  border: solid;
+}
+
+.personForm {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+} */

@@ -26,5 +26,6 @@ max-width: 100%;
 }
 
 .map path:hover {
+  transition: fill 0.1s ease-in;
   fill: red;
 }
